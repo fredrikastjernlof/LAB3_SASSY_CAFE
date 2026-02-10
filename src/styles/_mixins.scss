@@ -1,0 +1,9 @@
+@use "./variables" as var;
+
+@mixin sassy-logo($main, $shadow) {
+  font-family: var.$font-logo;
+  color: $main;
+  text-shadow:
+    2px 2px 0 $shadow,
+    4px 4px 0 rgba(0, 0, 0, 0.15);
+}
