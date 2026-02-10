@@ -46,8 +46,6 @@ async function run() {
             .resize({ width, withoutEnlargement: true })
             .webp({ quality })
             .toFile(outputPath);
-
-        console.log(`Skapade WebP: ${outputName} (${isHeader ? "header" : "content"})`);
     }
 }
 
