@@ -1,6 +1,7 @@
 @use "sass:color";
 @use "./variables" as var;
 @use "./mixins" as mix;
+@use "./utilities";
 
 * {
   box-sizing: border-box;
@@ -15,6 +16,21 @@ body {
   --nav-hover: #{color.adjust(var.$color-accent-mint, $lightness: -15%)};
 }
 
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  padding: 0.5rem 0.75rem;
+  background: #000;
+  color: #fff;
+  border-radius: 0.5rem;
+  z-index: 9999;
+}
+
+.skip-link:focus {
+  top: 10px;
+}
+
 .container {
   max-width: 1100px;
   margin: 0 auto;
@@ -22,19 +38,23 @@ body {
   background-color: var.$color-white;
 }
 
-%card {
-  border-radius: 1rem;
-  padding: 1rem;
-}
-
 .main {
   @include mix.readable-text(var.$color-white);
   text-align: center;
+
+  p,
+  h2,
+  h3 {
+    max-width: 65ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 
 .site-header {
   @extend %card;
+  margin-bottom: 1rem;
   background: linear-gradient(135deg,
       var.$color-secondary,
       var.$color-primary,
@@ -76,35 +96,23 @@ body {
 }
 
 .hero {
-  margin-top: 1rem;
 
   &-img {
     width: 100%;
     display: block;
     border-radius: 1rem;
+    max-height: 600px;
+    object-fit: cover;
+    object-position: center;
   }
 
   &-content {
-    position: relative;
-    margin-bottom: 0.5rem;
-    padding: 1rem 0 1.5rem;
-    
+    padding-top: 1.5rem;
+    @extend %rainbow-divider-after;
+  }
 
-    &::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: 0;
-      transform: translateX(-50%);
-      width: 75%;
-      height: 4px;
-      border-radius: 999px;
-
-      background: linear-gradient(90deg,
-          var.$color-secondary,
-          var.$color-primary,
-          var.$color-accent-mint );
-    }
+  &-sass {
+    padding-top: 1.5rem;
   }
 }
 
@@ -115,6 +123,9 @@ body {
 }
 
 .featured {
+  background-color: darken(var.$color-secondary, 4%);
+  @extend %card;
+
   &-img:nth-child(3n + 1) {
     grid-column: span 2;
     aspect-ratio: 16 / 9;
@@ -128,6 +139,13 @@ body {
     border-radius: 0.75rem;
   }
 
+}
+
+.sass-page {
+  margin-bottom: 2.5rem;
+  h3 {
+    @extend %rainbow-divider-before;
+  }
 }
 
 .site-footer {
@@ -180,14 +198,10 @@ body {
         var.$dark-purple-black );
   }
 
-  .hero-content::after {
-    background: linear-gradient(90deg,
-        var.$color-purple,
-        var.$dark-pink,
-        var.$color-mint);
+  .featured {
+    background-color: lighten(var.$dark-primary, 4%);
   }
 
-  .featured,
   .main {
     background-color: var.$dark-primary;
     @include mix.readable-text(var.$dark-primary);
@@ -207,4 +221,3 @@ body {
     @include mix.readable-text(var.$dark-primary);
   }
 }
-
