@@ -18,8 +18,9 @@ body {
 
 .skip-link {
   position: absolute;
-  top: -40px;
+  top: 0;
   left: 0;
+  transform: translateY(-150%);
   padding: 0.5rem 0.75rem;
   background: #000;
   color: #fff;
@@ -28,7 +29,7 @@ body {
 }
 
 .skip-link:focus {
-  top: 10px;
+  transform: translateY(0);
 }
 
 .container {
