@@ -14,8 +14,8 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 main: resolve(__dirname, "index.html"),
-                SASS: resolve(__dirname, "SASS.html")
-            }
-        }
-    }
+                SASS: resolve(__dirname, "sass.html")
+            },
+        },
+    },
 });
