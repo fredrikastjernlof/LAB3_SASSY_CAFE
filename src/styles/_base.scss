@@ -1,7 +1,7 @@
 @use "sass:color";
 @use "./variables" as var;
 @use "./mixins" as mix;
-@use "./utilities";
+@use "./utilities" as *;
 
 * {
   box-sizing: border-box;
@@ -119,7 +119,7 @@ body {
   }
 
   h2,
-  h3{
+  h3 {
     line-height: 1.2;
   }
 }
@@ -251,6 +251,10 @@ body {
         var.$dark-secondary,
         var.$dark-primary,
         var.$dark-purple-black );
+
+    a {
+      color: var.$dark-text;
+    }
   }
 
   .featured {
@@ -262,10 +266,6 @@ body {
     @include mix.readable-text(var.$dark-primary);
     border-radius: 1rem;
     padding: 0.5rem 1rem;
-  }
-
-  a {
-    color: var.$dark-text;
   }
 
   .site-footer {

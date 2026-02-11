@@ -1,10 +1,12 @@
 @use "./variables" as var;
 
+/* Grundinställning av "kort": gemensam padding + rundade hörn */
 %card {
   border-radius: 1rem;
   padding: 1rem;
 }
 
+/* Regnbågslinje före rubrik/sektion */
 %rainbow-divider-before {
     position: relative;
     padding-top: 1.5rem;
@@ -27,6 +29,7 @@
     }
 }
 
+/* Regnbågslinje före rubrik/sektion */
 %rainbow-divider-after {
     position: relative;
     padding-bottom: 1.5rem;
