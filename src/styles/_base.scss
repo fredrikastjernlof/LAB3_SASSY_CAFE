@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "./variables" as var;
 @use "./mixins" as mix;
 
@@ -11,6 +12,7 @@ body {
   line-height: 1.6;
   background-color: var.$color-bg;
   color: var.$color-text;
+  --nav-hover: #{color.adjust(var.$color-accent-mint, $lightness: -15%)};
 }
 
 .container {
@@ -20,12 +22,24 @@ body {
   background-color: var.$color-white;
 }
 
-.site-header {
-  padding: 1rem;
+%card {
   border-radius: 1rem;
+  padding: 1rem;
+}
+
+.main {
+  @include mix.readable-text(var.$color-white);
+  text-align: center;
+}
+
+
+.site-header {
+  @extend %card;
   background: linear-gradient(135deg,
       var.$color-secondary,
-      var.$color-primary );
+      var.$color-primary,
+      var.$color-purple,
+      var.$color-accent-mint );
 
   .logo {
     font-size: clamp(2.8rem, 5vw, 4rem);
@@ -53,7 +67,7 @@ body {
 
           &:hover {
             text-decoration: underline;
-            color: var.$color-accent-mint;
+            color: var(--nav-hover);
           }
         }
       }
@@ -74,7 +88,7 @@ body {
     position: relative;
     margin-bottom: 0.5rem;
     padding: 1rem 0 1.5rem;
-    text-align: center;
+    
 
     &::after {
       content: "";
@@ -101,8 +115,6 @@ body {
 }
 
 .featured {
-  text-align: center;
-
   &-img:nth-child(3n + 1) {
     grid-column: span 2;
     aspect-ratio: 16 / 9;
@@ -118,6 +130,17 @@ body {
 
 }
 
+.site-footer {
+  @extend %card;
+  margin-top: 1rem;
+  text-align: center;
+  background: linear-gradient(135deg,
+      var.$color-secondary,
+      var.$color-primary );
+
+  @include mix.readable-text(var.$color-primary);
+}
+
 @media (min-width: 620px) {
   .featured-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -129,21 +152,17 @@ body {
   }
 }
 
-.site-footer {
-  margin-top: 1rem;
-  padding: 1rem;
-  border-radius: 1rem;
-  text-align: center;
-  background: linear-gradient(135deg,
-      var.$color-secondary,
-      var.$color-primary );
-}
 
+
+
+/*------------------Dark-theme------------------*/
 
 @media (prefers-color-scheme: dark) {
   body {
     background-color: var.$dark-bg;
     color: var.$dark-text;
+
+    --nav-hover: #{color.adjust(var.$dark-pink, $lightness: 10%)};
 
     .container {
       background-color: var.$dark-black;
@@ -152,16 +171,26 @@ body {
   }
 
   .site-header {
-    background: linear-gradient(135deg,
-        var.$dark-secondary,
-        var.$dark-primary );
     margin-bottom: 1rem;
+    background: linear-gradient(135deg,
+        var.$dark-purple-pink,
+        var.$dark-purple,
+        var.$dark-secondary,
+        var.$dark-primary,
+        var.$dark-purple-black );
+  }
+
+  .hero-content::after {
+    background: linear-gradient(90deg,
+        var.$color-purple,
+        var.$dark-pink,
+        var.$color-mint);
   }
 
   .featured,
   .main {
     background-color: var.$dark-primary;
-    color: var.$dark-text;
+    @include mix.readable-text(var.$dark-primary);
     border-radius: 1rem;
     padding: 0.5rem 1rem;
   }
@@ -174,5 +203,8 @@ body {
     background: linear-gradient(135deg,
         var.$dark-secondary,
         var.$dark-primary );
+
+    @include mix.readable-text(var.$dark-primary);
   }
 }
+
