@@ -38,22 +38,11 @@ body {
   background-color: var.$color-white;
 }
 
-.main {
-  @include mix.readable-text(var.$color-white);
-  text-align: center;
-
-  p,
-  h2,
-  h3 {
-    max-width: 65ch;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-
 .site-header {
   @extend %card;
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 0.2rem;
   margin-bottom: 1rem;
   background: linear-gradient(135deg,
       var.$color-secondary,
@@ -62,10 +51,28 @@ body {
       var.$color-accent-mint );
 
   .logo {
-    font-size: clamp(2.8rem, 5vw, 4rem);
-    margin: 0;
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    margin-top: 2.5rem;
 
     @include mix.sassy-logo(var.$color-mint, var.$color-purple);
+  }
+
+  .brand {
+    display: flex;
+    align-items: flex-start;
+
+    &-link {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    &-icon {
+      width: clamp(50px, 8vw, 100px);
+      height: auto;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+    }
   }
 
   .nav {
@@ -77,13 +84,16 @@ body {
       margin: 0;
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
+      gap: 1rem;
 
       li {
         a {
           text-decoration: none;
           color: var.$color-white;
           font-weight: bold;
+          display: inline-block;
+          padding: 0.5rem 1rem;
+          border-radius: 0.75rem;
 
           &:hover {
             text-decoration: underline;
@@ -92,6 +102,25 @@ body {
         }
       }
     }
+  }
+}
+
+.main {
+  @include mix.readable-text(var.$color-white);
+  text-align: center;
+
+  p,
+  h2,
+  h3 {
+    max-width: 65ch;
+    hyphens: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  h2,
+  h3{
+    line-height: 1.2;
   }
 }
 
@@ -107,7 +136,7 @@ body {
   }
 
   &-content {
-    padding-top: 1.5rem;
+    padding-top: 0.5rem;
     @extend %rainbow-divider-after;
   }
 
@@ -143,6 +172,7 @@ body {
 
 .sass-page {
   margin-bottom: 2.5rem;
+
   h3 {
     @extend %rainbow-divider-before;
   }
@@ -159,7 +189,33 @@ body {
   @include mix.readable-text(var.$color-primary);
 }
 
+/* ------------------------------------------------*/
+/* -----------------Mindre-skärmar-----------------*/
+
+@media (max-width: 600px) {
+
+  .site-header .nav-ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+
+    li a {
+      width: 100%;
+      text-align: center;
+      padding: 0.75rem 1rem;
+    }
+  }
+
+  .hero-img {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------*/
+/* ---------------Lite-större-skärmar--------------*/
+
 @media (min-width: 620px) {
+
   .featured-grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -171,9 +227,8 @@ body {
 }
 
 
-
-
-/*------------------Dark-theme------------------*/
+/* ------------------------------------------------*/
+/* -------------------Dark-theme-------------------*/
 
 @media (prefers-color-scheme: dark) {
   body {
