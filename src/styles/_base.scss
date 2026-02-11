@@ -1,7 +1,7 @@
 @use "sass:color";
-@use "./variables" as var;
-@use "./mixins" as mix;
-@use "./utilities" as *;
+@use "variables" as var;
+@use "mixins" as mix;
+@use "utilities" as *;
 
 * {
   box-sizing: border-box;
